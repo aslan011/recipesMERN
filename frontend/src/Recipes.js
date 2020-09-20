@@ -14,7 +14,7 @@ function Recipes(props) {
                             Some quick example text to build on the card title and make up the bulk of
                             the card's content.
                             </Card.Text>
-                            <Button variant="primary">Go somewhere</Button>
+                            <a href={`/recipe/${item._id}`}><Button variant="primary">More details</Button></a>
                         </Card.Body>
                     </Card>
                 ))}

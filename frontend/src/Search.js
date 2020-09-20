@@ -35,7 +35,7 @@ class Search extends Component {
                 <ListGroup>
                     {this.state.items.map(item => (
                 <ListGroupItem>
-                    {item.name}
+                    <a href={`/recipe/${item._id}`}>{item.name}</a>
                 </ListGroupItem>
                 ))}
                 </ListGroup>

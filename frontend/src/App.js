@@ -3,6 +3,9 @@ import Search from './Search';
 import Recipes from './Recipes';
 import TagFilter from './Filter';
 import { Col, Container, Image, Row } from 'react-bootstrap';
+import {Route, BrowserRouter as Router} from 'react-router-dom';
+import Meal from './pages/meal_detail'
+import Switch from 'react-bootstrap/esm/Switch';
 
 class App extends Component {
   constructor() {
@@ -29,17 +32,24 @@ class App extends Component {
  
   render() {
   return (
-    <Container>
-      <Row>
-        <Search />
-      </Row>
-      <Row>
-        <TagFilter handleStateChange = {this.handleStateChange} />
-      </Row>
-      <Row>
-        <Recipes items={this.state.items} />
-      </Row>
-    </Container>
+    <Router>
+        <Switch>
+            <Route path='/recipe/:id' component={Meal} />
+          <Route exact path='/'>
+            <Container>
+              <Row>
+                <Search />
+              </Row>
+              <Row>
+                <TagFilter handleStateChange = {this.handleStateChange} />
+              </Row>
+              <Row>
+                <Recipes items={this.state.items} />
+              </Row>
+            </Container>
+        </Route>
+      </Switch>
+    </Router>
   );
 }}
 
