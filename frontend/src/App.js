@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import Search from './Search';
 import Recipes from './Recipes';
 import TagFilter from './Filter';
-import { Col, Container, Image, Row } from 'react-bootstrap';
+import { Button, Col, Container, Image, Row } from 'react-bootstrap';
 import {Route, BrowserRouter as Router} from 'react-router-dom';
 import Meal from './pages/meal_detail'
+import addMeal from './pages/add_meal'
 import Switch from 'react-bootstrap/esm/Switch';
 
 class App extends Component {
@@ -16,9 +17,13 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch(`http://localhost:9000/`)
+    this.loadRecipes();
+  }
+
+  loadRecipes() {
+    fetch(`http://localhost:9000/recipes`)
         .then(response => response.json())
-        .then(items => this.setState({items}))
+        .then(items => this.setState({items}));
   }
 
   handleStateChange = (items, filter, term) => {
@@ -29,26 +34,33 @@ class App extends Component {
     } */
     this.setState({ items })
   }
- 
+
   render() {
   return (
     <Router>
         <Switch>
+            <Route path='/recipe/addMeal' component={addMeal} />
             <Route path='/recipe/:id' component={Meal} />
-          <Route exact path='/'>
-            <Container>
-              <Row>
-                <Search />
-              </Row>
-              <Row>
-                <TagFilter handleStateChange = {this.handleStateChange} />
-              </Row>
-              <Row>
-                <Recipes items={this.state.items} />
-              </Row>
-            </Container>
-        </Route>
-      </Switch>
+            <Route path='/recipes'>
+              <Container>
+                <Row>
+                  <Button href='/recipe/addMeal'>Add meal</Button>
+                </Row>
+                <Row>
+                  <Search />
+                </Row>
+                <Row>
+                  <TagFilter handleStateChange = {this.handleStateChange} />
+                </Row>
+                <Row>
+                  <Recipes items={this.state.items} />
+                </Row>
+                <Row>
+                  <Button onClick={() =>{this.loadRecipes()}}>View more</Button>
+                </Row>
+              </Container>
+            </Route>
+        </Switch>
     </Router>
   );
 }}

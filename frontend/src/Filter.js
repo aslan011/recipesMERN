@@ -30,7 +30,7 @@ class TagFilter extends Component {
             <Accordion.Toggle as={Button} variant="link" eventKey="1">
                 Cuisine
             </Accordion.Toggle>
-            <Accordion.Toggle as={Button } variant="link" eventKey="2">
+            <Accordion.Toggle as={Button} variant="link" eventKey="2">
                 <Button onClick={this.handleSubmit} type="submit" value="Submit">Search</Button>
             </Accordion.Toggle>
             <Accordion.Collapse eventKey="0">

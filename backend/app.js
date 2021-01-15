@@ -13,6 +13,7 @@ mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true, use
   .then((result) => console.log("connected to db"))
 
 const db = mongoose.connection
+mongoose.set('debug', true);
 
 //Bind connection to error event (to get notification of connection errors)
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));

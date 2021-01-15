@@ -7,6 +7,9 @@ const MealSchema = new Schema(
     name: {type: String, required: true},
     ingredients: {type: [String], required: true},
     cuisine: {type: String, required: true},
+    difficulty: {type: String},
+    description: {type: String},
+    instructions: {type: String},
     tags: {type: [String]}
   }
 );
@@ -15,7 +18,7 @@ const MealSchema = new Schema(
 MealSchema
 .virtual('url')
 .get(function () {
-  return '/catalog/meal/' + this._id;
+  return '/recipe' + this._id;
 });
 
 //Export model

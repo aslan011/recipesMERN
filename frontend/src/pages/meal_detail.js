@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Accordion, Button, Container, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Accordion, Alert, Button, Container, ListGroup, ListGroupItem } from 'react-bootstrap';
 
 
 class Meal extends Component {
@@ -18,7 +18,27 @@ class Meal extends Component {
         .then(meal => this.setState({meal}))
   }
 
+  handleDelete = (e) => {
+    e.target.disabled = true;
+
+    const url = `http://localhost:9000/recipe/${this.state.meal._id}/delete`;
+
+    const request = new Request(url, {
+      method: 'DELETE'
+    });
+
+    fetch(request)
+    .then(res => res.json())
+    .then(res => this.setState({statusMessage:res.statusMessage}))
+    .then(window.setTimeout(function() {
+      window.location.href = '/recipes';
+    }, 1500))
+    .catch(res => this.setState({statusMessage:res.statusMessage}));
+  };
+
   render() {
+  let statusMessage = null;
+  if (this.state.statusMessage) { statusMessage = this.state.statusMessage};
   return (
     <Container>
         <h1 class="primary">{this.state.meal.name}</h1>
@@ -45,6 +65,9 @@ class Meal extends Component {
               </ListGroup>
             </Accordion.Collapse>
         </Accordion>
+        <Button href={`/recipe/${this.state.meal._id}/edit`}>Edit</Button>
+        <Button onClick={this.handleDelete}>Delete</Button>
+        <Alert>{statusMessage}</Alert>
     </Container>
   );
 }}
