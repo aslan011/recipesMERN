@@ -9,6 +9,7 @@ $theme-colors: (
 
 * {
   box-sizing: border-box;
+  border-radius: 0.5em;
 }
 
 .container {
@@ -27,6 +28,10 @@ $theme-colors: (
   width: 20em;
 }
 
+.btn {
+  margin: 1em;
+}
+
 .tags.btn {
   margin: 1em;
 }
@@ -35,5 +40,10 @@ $theme-colors: (
   margin: 1em;
 }
 
+.popup-content {
+  width: 60%;
+  background-color: lightcoral;
+  padding: 2em;
+}
 
 @import '~bootstrap/scss/bootstrap.scss';

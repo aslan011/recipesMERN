@@ -23,7 +23,7 @@ class addMeal extends Component {
     const nodeArr = e.target.childNodes;
     nodeArr[nodeArr.length - 1].disabled = true;
     e.preventDefault();
-    const url = 'http://localhost:9000/recipe/addMeal';
+    const url = 'http://localhost:9000/addMeal';
 
     const request = new Request(url, {
       method: 'POST',

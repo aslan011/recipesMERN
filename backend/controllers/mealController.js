@@ -1,5 +1,6 @@
 const Meal = require('../models/meal');
 const url = require('url');
+const { json } = require('express');
 
 exports.meal_detail = function(req, res) {
   Meal.findById(req.params.id)
@@ -7,7 +8,7 @@ exports.meal_detail = function(req, res) {
     if (err) return res.status(500).send(err);
     res.send(meal)
   })
-}
+};
 
 exports.index = function(req, res) {
   const query = url.parse(req.url,true).query
@@ -65,6 +66,33 @@ exports.add_meal = function(req, res) {
 
     res.status(200)
     .json({ statusMessage: 'Meal successfully added' })
+    .send()
+  });
+};
+
+exports.edit_meal = function(req, res) {
+  const filter = { _id: req.params.id};
+  const update = {
+    name: req.body.name,
+    description: req.body.description,
+    ingredients: req.body.ingredients,
+    cuisine: req.body.cuisine,
+    difficulty: req.body.difficulty,
+    tag: req.body.tags
+  }
+
+  // was trying to do Json.parse here and it wasnt working, had to manaully parse it.
+  Meal.findOneAndUpdate(filter, update)
+  .exec(function (err, meal) {
+    if (err) return (
+      console.log(err)
+      .res.status(500)
+      .json({ statusMessage: err.message })
+      .send()
+      );
+  
+    res.status(200)
+    .json({ statusMessage: 'Meal successfully updated' })
     .send()
   });
 };

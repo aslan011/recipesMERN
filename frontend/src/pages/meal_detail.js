@@ -1,27 +1,23 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { Accordion, Alert, Button, Container, ListGroup, ListGroupItem } from 'react-bootstrap';
+import ModalWindow from '../ModalWindow';
 
 
-class Meal extends Component {
-  constructor() {
-    super()
-    this.state = {
-      meal: {
-        ingredients: []
-      }
-    }
-  }
+function Meal(props) {
 
-  componentDidMount() {
-    fetch(`http://localhost:9000/recipe/${this.props.match.params.id}/`)
-        .then(response => response.json())
-        .then(meal => this.setState({meal}))
-  }
+  const [mealState, setMeal] = useState();
+  const [statusMessage, setStatusMessage] = useState()
 
-  handleDelete = (e) => {
+  React.useEffect(() => {
+    fetch(`http://localhost:9000/recipe/${props.match.params.id}/`)
+    .then(response => response.json())
+    .then(meal => setMeal(meal));
+  },[])
+
+  const handleDelete = (e) => {
     e.target.disabled = true;
 
-    const url = `http://localhost:9000/recipe/${this.state.meal._id}/delete`;
+    const url = `http://localhost:9000/recipe/${mealState._id}/delete`;
 
     const request = new Request(url, {
       method: 'DELETE'
@@ -29,21 +25,20 @@ class Meal extends Component {
 
     fetch(request)
     .then(res => res.json())
-    .then(res => this.setState({statusMessage:res.statusMessage}))
+    .then(res => setStatusMessage({statusMessage}))
     .then(window.setTimeout(function() {
       window.location.href = '/recipes';
     }, 1500))
-    .catch(res => this.setState({statusMessage:res.statusMessage}));
+    .catch(res => setStatusMessage({statusMessage}));
   };
 
-  render() {
-  let statusMessage = null;
-  if (this.state.statusMessage) { statusMessage = this.state.statusMessage};
+  if (mealState) {
+
   return (
     <Container>
-        <h1 class="primary">{this.state.meal.name}</h1>
-        <h2 class="primary">{this.state.meal.cuisine}</h2>
-        <h3 class="primary">{this.state.meal.difficulty}</h3>
+        <h2 className="primary">{mealState.cuisine}</h2>
+        <h3 className="primary">{mealState.difficulty}</h3>
+        <h1 className="primary">{mealState.name}</h1>
 
         <Accordion>
           <Accordion.Toggle as={Button} variant="link" eventKey="0">
@@ -55,21 +50,16 @@ class Meal extends Component {
           <Accordion.Collapse eventKey="0">
               <p>Step appear here as a list</p>
             </Accordion.Collapse>
-            <Accordion.Collapse eventKey="1">
-            <ListGroup>
-                    {this.state.meal.ingredients.map(item => (
-                <ListGroupItem>
-                    {item}
-                </ListGroupItem>
-                ))}
-              </ListGroup>
-            </Accordion.Collapse>
         </Accordion>
-        <Button href={`/recipe/${this.state.meal._id}/edit`}>Edit</Button>
-        <Button onClick={this.handleDelete}>Delete</Button>
+        <ModalWindow meal = {mealState}/>
+        <Button onClick={handleDelete}>Delete</Button>
         <Alert>{statusMessage}</Alert>
     </Container>
-  );
-}}
+  )};
+
+  return (
+    <></>
+  )
+};
 
 export default Meal;

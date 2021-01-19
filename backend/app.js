@@ -3,6 +3,7 @@ const path = require('path');
 require('dotenv').config();
 const mongoose = require('mongoose');
 const cors = require('cors');
+var morgan = require('morgan');
 
 var indexRouter = require('./routes/index');
 
@@ -18,7 +19,16 @@ mongoose.set('debug', true);
 //Bind connection to error event (to get notification of connection errors)
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 
+app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));

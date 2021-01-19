@@ -39,12 +39,12 @@ class App extends Component {
   return (
     <Router>
         <Switch>
-            <Route path='/recipe/addMeal' component={addMeal} />
+            <Route path='/addMeal' component={addMeal} />
             <Route path='/recipe/:id' component={Meal} />
             <Route path='/recipes'>
               <Container>
                 <Row>
-                  <Button href='/recipe/addMeal'>Add meal</Button>
+                  <Button href='/addMeal'>Add meal</Button>
                 </Row>
                 <Row>
                   <Search />
