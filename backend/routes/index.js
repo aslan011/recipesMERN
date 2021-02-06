@@ -2,6 +2,11 @@ const express = require('express');
 const router = express.Router();
 
 const mealController = require('../controllers/mealController')
+const userController = require('../controllers/userController')
+
+router.post('/login', userController.login)
+
+router.post('/register', userController.register)
 
 router.get('/recipes', mealController.homepage)
 
@@ -17,8 +22,8 @@ router.get('/tags/:query', mealController.tags)
 
 router.get('/:query', mealController.index);
 
-router.get('/', function(req, res) {
+/* router.get('/', function(req, res) {
     res.redirect('/recipes');
-  });
+  }); */
 
 module.exports = router;

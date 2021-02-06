@@ -4,6 +4,7 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const cors = require('cors');
 var morgan = require('morgan');
+const passport = require("passport");
 
 var indexRouter = require('./routes/index');
 
@@ -30,9 +31,15 @@ app.use((req, res, next) => {
 
 app.use(morgan('dev'));
 app.use(express.json());
+
+app.use(cors());
+
+// Passport middleware
+app.use(passport.initialize());// Passport config
+require("./config/passport")(passport);
+
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(cors());
 
 app.use('/', indexRouter);
 
