@@ -23,7 +23,7 @@ exports.register = (req, res) => {
     
     User.findOne({ username: req.body.username }).then(user => {
       if (user) {
-        return res.status(400).json({ username: "Username already exists" });
+        return res.status(400).json({ response: "Username already exists" });
       } 
       
       else {
@@ -68,7 +68,7 @@ exports.login = (req, res) => {
     User.findOne({ username }).then(user => {
       // Check if user exists
       if (!user) {
-        return res.status(404).json({ username: "Username not found" });
+        return res.status(404).json({ response: "Username not found" });
       }
       // Check password
       bcrypt.compare(password, user.password).then(isMatch => {
@@ -89,14 +89,15 @@ exports.login = (req, res) => {
             (err, token) => {
               res.json({
                 success: true,
-                token: "Bearer " + token
+                token: "Bearer " + token,
+                response: "Login successful"
               });
             }
           );
         } else {
           return res
             .status(400)
-            .json({ passwordincorrect: "Password incorrect" });
+            .json({ response: "Password incorrect" });
         }
       });
     });
