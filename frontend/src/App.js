@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import Search from './Search';
 import Recipes from './Recipes';
 import TagFilter from './Filter';
+import Login from './LoginModal';
 import { Button, Col, Container, Image, Row } from 'react-bootstrap';
-import {Route, BrowserRouter as Router} from 'react-router-dom';
+import {Route, BrowserRouter as Router, Link} from 'react-router-dom';
 import Meal from './pages/meal_detail'
 import addMeal from './pages/add_meal'
 import Switch from 'react-bootstrap/esm/Switch';
@@ -12,7 +13,8 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-        items: []
+        items: [],
+        loggedIn: "Not logged in"
     }
   }
 
@@ -44,7 +46,8 @@ class App extends Component {
             <Route path='/recipes'>
               <Container>
                 <Row>
-                  <Button href='/addMeal'>Add meal</Button>
+                  <Link to='/addMeal'>Add meal</Link>
+                  <Login setState={state => this.setState(state)}/>
                 </Row>
                 <Row>
                   <Search />
@@ -53,7 +56,7 @@ class App extends Component {
                   <TagFilter handleStateChange = {this.handleStateChange} />
                 </Row>
                 <Row>
-                  <Recipes items={this.state.items} />
+                  <Recipes items={this.state.items} loggedIn={this.state.loggedIn} />
                 </Row>
                 <Row>
                   <Button onClick={() =>{this.loadRecipes()}}>View more</Button>

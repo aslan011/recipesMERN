@@ -1,9 +1,10 @@
-import React from 'react'
-import { Button, Card, Container, ListGroupItem, Row } from 'react-bootstrap';
+import React from 'react';
+import { Button, Card, Container, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 function Recipes(props) {
     return (
-       <Container>
+        <Container>
            <Row>
                 {props.items.map(item => (
                     <Card style={{ width: '15rem' }}>
@@ -14,12 +15,13 @@ function Recipes(props) {
                             Some quick example text to build on the card title and make up the bulk of
                             the card's content.
                             </Card.Text>
-                            <a href={`/recipe/${item._id}`}><Button variant="primary">More details</Button></a>
+                            <Link to={`/recipe/${item._id}`} variant="primary">More details</Link>
                         </Card.Body>
                     </Card>
                 ))}
             </Row>
        </Container>
+
     )
 } 
 

@@ -1,10 +1,10 @@
 import React, { Component, useState } from 'react';
-import { Accordion, Alert, Button, Container, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Accordion, Alert, Button, Container, ListGroup, ListGroupItem, Row } from 'react-bootstrap';
 import ModalWindow from '../ModalWindow';
 
 
 function Meal(props) {
-
+  console.log(props.location)
   const [mealState, setMeal] = useState();
   const [statusMessage, setStatusMessage] = useState()
 
@@ -36,11 +36,23 @@ function Meal(props) {
 
   return (
     <Container>
-        <h2 className="primary">{mealState.cuisine}</h2>
-        <h3 className="primary">{mealState.difficulty}</h3>
+      <Row>
+        <h1>{props.loggedIn}</h1>
         <h1 className="primary">{mealState.name}</h1>
-
-        <Accordion>
+      </Row>
+      <Row>
+        <h5 className="secondary">{mealState.cuisine}</h5>
+        <h5 className="secondary">{mealState.difficulty}</h5>
+      </Row>
+      <Row>
+      <ModalWindow meal = {mealState}/>
+        <Button onClick={handleDelete}>Delete</Button>
+      </Row>
+      <Row>
+      <Alert>{statusMessage}</Alert>
+      </Row>
+      <Row>
+      <Accordion>
           <Accordion.Toggle as={Button} variant="link" eventKey="0">
               Steps
           </Accordion.Toggle>
@@ -51,9 +63,7 @@ function Meal(props) {
               <p>Step appear here as a list</p>
             </Accordion.Collapse>
         </Accordion>
-        <ModalWindow meal = {mealState}/>
-        <Button onClick={handleDelete}>Delete</Button>
-        <Alert>{statusMessage}</Alert>
+      </Row>
     </Container>
   )};
 
