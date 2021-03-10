@@ -88,6 +88,7 @@ exports.login = (req, res) => {
             },
             (err, token) => {
               res.json({
+                username: user.username,
                 success: true,
                 token: "Bearer " + token,
                 response: "Login successful"
