@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import Search from './Search';
-import Recipes from './Recipes';
-import TagFilter from './Filter';
-import Login from './LoginModal';
 import { Button, Col, Container, Image, Row } from 'react-bootstrap';
 import {Route, BrowserRouter as Router, Link} from 'react-router-dom';
 import Meal from './pages/meal_detail'
 import addMeal from './pages/add_meal'
+import Meals from './pages/Homepage'
 import Switch from 'react-bootstrap/esm/Switch';
 
 class App extends Component {
@@ -14,7 +11,8 @@ class App extends Component {
     super()
     this.state = {
         items: [],
-        loggedIn: "Not logged in"
+        loggedIn: "Not logged in",
+        authUser: JSON.parse(localStorage.getItem('token')),
     }
   }
 
@@ -43,26 +41,7 @@ class App extends Component {
         <Switch>
             <Route path='/addMeal' component={addMeal} />
             <Route path='/recipe/:id' component={Meal} />
-            <Route path='/recipes'>
-              <Container>
-                <Row>
-                  <Link to='/addMeal'>Add meal</Link>
-                  <Login setState={state => this.setState(state)}/>
-                </Row>
-                <Row>
-                  <Search />
-                </Row>
-                <Row>
-                  <TagFilter handleStateChange = {this.handleStateChange} />
-                </Row>
-                <Row>
-                  <Recipes items={this.state.items} loggedIn={this.state.loggedIn} />
-                </Row>
-                <Row>
-                  <Button onClick={() =>{this.loadRecipes()}}>View more</Button>
-                </Row>
-              </Container>
-            </Route>
+            <Route path='/recipes' component={() => <Meals handleStateChange={this.handleStateChange} state={this.state} loadRecipes={this.loadRecipes} setState={state => this.setState(state)}/>}/>
         </Switch>
     </Router>
   );

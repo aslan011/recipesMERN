@@ -23,10 +23,8 @@ function ModalWindow (props) {
 
     fetch(request)
     .then(res => res.json())
-    .then(res => setRes(res))
-    .then(window.setTimeout(function() {
-      window.location.reload();
-    }, 500))
+    .then(res => props.setMeal(res.meal))
+    .then(res => setRes(res.statusMessage))
     .catch(res => console.log(res));
   };
 

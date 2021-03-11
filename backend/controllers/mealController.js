@@ -92,7 +92,7 @@ exports.edit_meal = function(req, res) {
       );
   
     res.status(200)
-    .json({ statusMessage: 'Meal successfully updated' })
+    .json({ meal: update, statusMessage: 'Meal successfully updated' })
     .send()
   });
 };

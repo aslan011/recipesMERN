@@ -22,22 +22,22 @@ function ModalWindow (props) {
 
     fetch(request)
     .then(res => res.json())
-    .then(res => handleStateChange(res.response))
-    .catch(res => setStatusMessage(res.response));
+    .then(res => handleStateChange(res))
+    .catch(res => setStatusMessage(res));
   };
 
-  const handleStateChange = (response) => {
-    setStatusMessage(response);
-    reloadWindowIfLoginSuccessful(response);
+  const handleStateChange = (res) => {
+    setStatusMessage(res.response);
+    reloadWindowIfLoginSuccessful(res);
   }
 
-  const reloadWindowIfLoginSuccessful = (response) => {
-    console.log("hitting")
-    if (response == "Login successful") {
+  const reloadWindowIfLoginSuccessful = (res) => {
+    if (res.response == "Login successful") {
       window.setTimeout(function() {
         handleClose();
       }, 500);
-      props.setState({loggedIn: [response]});
+      localStorage.setItem('token',  JSON.stringify(res.token))
+      props.setState({loggedIn: [res.response]});
       return      
     }
   };
