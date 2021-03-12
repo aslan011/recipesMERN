@@ -20,7 +20,7 @@ router.get('/recipe/:id', mealController.meal_detail)
 
 router.get('/tags/:query', mealController.tags)
 
-router.get('/:query', mealController.index);
+router.get('/search', mealController.index);
 
 /* router.get('/', function(req, res) {
     res.redirect('/recipes');

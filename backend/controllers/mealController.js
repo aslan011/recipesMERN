@@ -53,6 +53,7 @@ exports.add_meal = function(req, res) {
   const mealObj = new Meal({
     name: req.body.name,
     cuisine: req.body.cuisine,
+    difficulty: req.body.difficulty,
     ingredients: req.body.ingredients,
     instructions: req.body.instructions
   })
