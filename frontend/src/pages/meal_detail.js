@@ -1,5 +1,5 @@
 import React, { Component, useState } from 'react';
-import { Accordion, Alert, Button, Container, ListGroup, ListGroupItem, Row } from 'react-bootstrap';
+import { Accordion, Alert, Button, Card, Container, FormGroup, ListGroup, ListGroupItem, Row } from 'react-bootstrap';
 import ModalWindow from '../components/ModalWindow';
 
 
@@ -29,8 +29,39 @@ function Meal(props) {
     .then(res => setStatusMessage({statusMessage}))
     .then(window.setTimeout(function() {
       window.location.href = '/recipes';
-    }, 1500))
+    }, 100))
     .catch(res => setStatusMessage({statusMessage}));
+  };
+
+  const Accordian = () => {
+    return (
+          <Accordion>
+              <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                  Steps
+              </Accordion.Toggle>
+              <Accordion.Toggle as={Button} variant="link" eventKey="1">
+                  Ingredients
+              </Accordion.Toggle>
+              <Accordion.Collapse eventKey="0">
+              <ListGroup>
+                {mealState.instructions.map(step => (
+                        <ListGroupItem>
+                            {step}
+                        </ListGroupItem>
+                ))}
+            </ListGroup>
+                </Accordion.Collapse>
+                <Accordion.Collapse eventKey="1">
+              <ListGroup>
+                {mealState.ingredients.map(ingredient => (
+                  <ListGroupItem>
+                            {ingredient}
+                        </ListGroupItem>
+                ))}
+            </ListGroup>
+                </Accordion.Collapse>
+            </Accordion>
+    )
   };
 
   if (mealState && user != null) {
@@ -53,17 +84,7 @@ function Meal(props) {
           <Alert>{statusMessage}</Alert>
           </Row>
           <Row>
-          <Accordion>
-              <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                  Steps
-              </Accordion.Toggle>
-              <Accordion.Toggle as={Button} variant="link" eventKey="1">
-                  Ingredients
-              </Accordion.Toggle>
-              <Accordion.Collapse eventKey="0">
-                  <p>Step appear here as a list</p>
-                </Accordion.Collapse>
-            </Accordion>
+            {Accordian()}
        </Row>
     </Container>
   )}
@@ -80,17 +101,7 @@ function Meal(props) {
         <h5 className="secondary">{mealState.difficulty}</h5>
       </Row>
       <Row>
-          <Accordion>
-              <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                  Steps
-              </Accordion.Toggle>
-              <Accordion.Toggle as={Button} variant="link" eventKey="1">
-                  Ingredients
-              </Accordion.Toggle>
-              <Accordion.Collapse eventKey="0">
-                  <p>Step appear here as a list</p>
-                </Accordion.Collapse>
-            </Accordion>
+          {Accordian()}
        </Row>
     </Container>
     )}

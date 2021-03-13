@@ -56,6 +56,10 @@ class addMeal extends Component {
             <Form.Label>Cuisine</Form.Label>
             <Form.Control type="text"/>
         </Form.Group>
+        <Form.Group controlId="difficulty">
+            <Form.Label>Difficulty</Form.Label>
+            <Form.Control type="text"/>
+        </Form.Group>
         <Form.Group controlId="ingredients">
             <Form.Label>Ingredients</Form.Label>
             <Form.Control as="textarea" rows={5} />

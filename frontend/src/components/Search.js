@@ -11,14 +11,14 @@ class Search extends Component {
      
     handleChange = (e) => {
         e.preventDefault();
-        if (e.target.value == '') {
+        if (e.target.value.length < 3) {
             this.setState({
                 items: []
             })
             return
         }
 
-        fetch(`http://localhost:9000/recipes?name=${e.target.value}`)
+        fetch(`http://localhost:9000/search?name=${e.target.value}`)
             .then(response => response.json())
             .then(items => this.setState({ items }));
     }

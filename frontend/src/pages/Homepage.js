@@ -9,14 +9,15 @@ import {Route, BrowserRouter as Router, Link} from 'react-router-dom';
 
 
 function Meals(props) {
-  const user = JSON.parse(localStorage.getItem('token'));
+  const user = props.state.loggedIn
+  //const [user, setUser] = useState();
 
   if (user) {
     return (
       <Container>
     <Row>
       <Link to='/addMeal'>Add meal</Link>
-      <Button>Logout</Button>
+      <Button onClick={props.logout}>Logout</Button>
     </Row>
     <Row>
       <Search />

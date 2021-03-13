@@ -37,7 +37,7 @@ function ModalWindow (props) {
         handleClose();
       }, 500);
       localStorage.setItem('token',  JSON.stringify(res.token))
-      props.setState({loggedIn: [res.response]});
+      props.setState({loggedIn: true});
       return      
     }
   };

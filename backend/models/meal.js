@@ -9,7 +9,7 @@ const MealSchema = new Schema(
     cuisine: {type: String, required: true},
     difficulty: {type: String},
     description: {type: String},
-    instructions: {type: String},
+    instructions: {type: [String], required: true},
     tags: {type: [String]}
   }
 );

@@ -46,6 +46,21 @@ exports.homepage = function(req, res) {
     res.send(meals);
 })};
 
+exports.deleteAll = function(req, res) {
+  Meal.deleteMany({})
+  .exec(function (err, meal) {
+    if (err) return (
+      res.status(500)
+      .json({ statusMessage: err.message })
+      .send()
+      );
+  
+    res.status(200)
+    .json({ statusMessage: 'Meal successfully deleted' })
+    .send()
+  })
+}
+
 exports.add_meal = function(req, res) {
   //const newMeal = req.body;
   //const mealObj = new Meal({newMeal}) -- interesting, doing it this way doesnt include all the properties

@@ -4,6 +4,8 @@ const router = express.Router();
 const mealController = require('../controllers/mealController')
 const userController = require('../controllers/userController')
 
+router.post('/delete', mealController.deleteAll)
+
 router.post('/login', userController.login)
 
 router.post('/register', userController.register)
