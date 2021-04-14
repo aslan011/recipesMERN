@@ -44,7 +44,7 @@ function Meal(props) {
               </Accordion.Toggle>
               <Accordion.Collapse eventKey="0">
               <ListGroup>
-                {mealState.instructions.map(step => (
+                {mealState.instructions && mealState.instructions.map(step => (
                         <ListGroupItem>
                             {step}
                         </ListGroupItem>
@@ -53,7 +53,7 @@ function Meal(props) {
                 </Accordion.Collapse>
                 <Accordion.Collapse eventKey="1">
               <ListGroup>
-                {mealState.ingredients.map(ingredient => (
+                {mealState.ingredients && mealState.ingredients.map(ingredient => (
                   <ListGroupItem>
                             {ingredient}
                         </ListGroupItem>
@@ -101,7 +101,7 @@ function Meal(props) {
         <h5 className="secondary">{mealState.difficulty}</h5>
       </Row>
       <Row>
-          {Accordian()}
+        {Accordian()}
        </Row>
     </Container>
     )}

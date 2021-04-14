@@ -9,9 +9,19 @@ function ModalWindow (props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const splitToArray = (instructions, ingredients) => {
+    const splitInst = instructions.split(",");
+    const splitIngr = ingredients.split(",");
+    const updatedState = {...mealState};
+    updatedState['instructions'] = splitInst;
+    updatedState['ingredients'] = splitIngr;
+    setMealState(updatedState)
+  }
+
   const onSubmit = (e) => {
     setShow(false);
     e.preventDefault();
+    splitToArray(mealState.instructions, mealState.ingredients)
     const url = `http://localhost:9000/recipe/${mealState._id}`
     const request = new Request(url, {
       method: 'POST',

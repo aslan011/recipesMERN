@@ -7,9 +7,24 @@ class addMeal extends Component {
   constructor() {
     super()
     this.state = {
-      res: []
+      res: [],
+      ingredients: 5,
+      instructions: 3
     }
   };
+
+  addInputField = (e) => {
+    this.setState({[e.target.name]: this.state[e.target.name] + 1})
+  }
+
+  renderInputFields = (name) => {
+    const formInputs = []
+    for (let i = 0; i < this.state[name]; i++){
+      formInputs.push(<Form.Control type="text"/>)
+    }
+
+    return formInputs
+  }
 
   onChange = (e) => {
     const name = e.target.id ;
@@ -62,11 +77,13 @@ class addMeal extends Component {
         </Form.Group>
         <Form.Group controlId="ingredients">
             <Form.Label>Ingredients</Form.Label>
-            <Form.Control as="textarea" rows={5} />
+            {this.renderInputFields("ingredients")}
+            <Button name="ingredients" onClick={this.addInputField}>Add ingredient</Button>
         </Form.Group>
         <Form.Group controlId="instructions">
             <Form.Label>Instructions</Form.Label>
-            <Form.Control as="textarea" rows={5} />
+            {this.renderInputFields("instructions")}
+            <Button name="instructions" onClick={this.addInputField}>Add instruction</Button>
         </Form.Group>
         <Button variant="primary" id = "submit" type="submit">
           Submit
