@@ -8,18 +8,31 @@ class addMeal extends Component {
     super()
     this.state = {
       res: [],
-      ingredients: 5,
-      instructions: 3
+      ingredientsCount: 5,
+      instructionsCount: 3
     }
   };
 
+  handleMultiChange = (e) => {
+    const key = e.target.id;
+    const inputElements = document.getElementById(key).getElementsByTagName("input");
+    const inputs = [];
+    for (let i = 0; i < inputElements.length; i++) {
+      inputs.push(inputElements[i].value);
+    }
+    this.setState({[key]: inputs})
+    console.log(inputs);
+  }
+
   addInputField = (e) => {
-    this.setState({[e.target.name]: this.state[e.target.name] + 1})
+    const key = e.target.name + "Count";
+    this.setState({[key]: this.state[key] + 1})
   }
 
   renderInputFields = (name) => {
-    const formInputs = []
-    for (let i = 0; i < this.state[name]; i++){
+    const formInputs = [];
+    const key = name + "Count";
+    for (let i = 0; i < this.state[key]; i++){
       formInputs.push(<Form.Control type="text"/>)
     }
 
@@ -32,7 +45,7 @@ class addMeal extends Component {
     this.setState({
       [name]: value
     });
-  }
+  };
 
   onSubmit = (e) => {
     const nodeArr = e.target.childNodes;
@@ -62,25 +75,25 @@ class addMeal extends Component {
   if (this.state.res.statusMessage) { statusMessage = this.state.res.statusMessage};
 
   return (
-    <Form onSubmit={this.onSubmit} onChange={this.onChange}>
-        <Form.Group controlId="name">
+    <Form onSubmit={this.onSubmit}>
+        <Form.Group controlId="name" onChange={this.onChange}>
             <Form.Label>Meal name</Form.Label>
             <Form.Control type="text"/>
         </Form.Group>
-        <Form.Group controlId="cuisine">
+        <Form.Group controlId="cuisine" onChange={this.onChange}>
             <Form.Label>Cuisine</Form.Label>
             <Form.Control type="text"/>
         </Form.Group>
-        <Form.Group controlId="difficulty">
+        <Form.Group controlId="difficulty" onChange={this.onChange}>
             <Form.Label>Difficulty</Form.Label>
             <Form.Control type="text"/>
         </Form.Group>
-        <Form.Group controlId="ingredients">
+        <Form.Group controlId="ingredients" id="ingredients" onChange={this.handleMultiChange}>
             <Form.Label>Ingredients</Form.Label>
             {this.renderInputFields("ingredients")}
             <Button name="ingredients" onClick={this.addInputField}>Add ingredient</Button>
         </Form.Group>
-        <Form.Group controlId="instructions">
+        <Form.Group controlId="instructions" id="instructions" onChange={this.handleMultiChange}>
             <Form.Label>Instructions</Form.Label>
             {this.renderInputFields("instructions")}
             <Button name="instructions" onClick={this.addInputField}>Add instruction</Button>

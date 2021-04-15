@@ -13,7 +13,7 @@ function Meal(props) {
     fetch(`http://localhost:9000/recipe/${props.match.params.id}/`)
     .then(response => response.json())
     .then(meal => setMeal(meal));
-  },[])
+  },[props.match.params.id])
 
   const handleDelete = (e) => {
     e.target.disabled = true;
@@ -104,7 +104,7 @@ function Meal(props) {
         {Accordian()}
        </Row>
     </Container>
-    )}
+  )};
 
   return (
     <></>
