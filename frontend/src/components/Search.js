@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Container, FormControl, InputGroup, ListGroup, ListGroupItem, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 class Search extends Component {
     constructor() {
@@ -35,7 +36,7 @@ class Search extends Component {
                 <ListGroup>
                     {this.state.items.map(item => (
                 <ListGroupItem>
-                    <a href={`/recipe/${item._id}`}>{item.name}</a>
+                    <Link to={`/recipe/${item._id}`}>{item.name}</Link>
                 </ListGroupItem>
                 ))}
                 </ListGroup>

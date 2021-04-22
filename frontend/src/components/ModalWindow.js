@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Form, Modal } from 'react-bootstrap';
+import { Button, Col, Container, Form, Modal, Row } from 'react-bootstrap';
 
 function ModalWindow (props) {
   const [show, setShow] = useState(false);
@@ -46,6 +46,16 @@ function ModalWindow (props) {
     setMealState(updatedState);
   };
 
+  const removeInputField = (e) => {
+    const updatedState = {...mealState};
+    const name = e.target.name;
+    const id = e.target.id;
+    const index = mealState[name].findIndex((a) => {return a == e.target.id});
+    console.log(index)
+    updatedState[name].splice(index, 1);
+    setMealState(updatedState);
+  };
+
   const EditForm = () => {
     return (
         <Form>
@@ -60,13 +70,35 @@ function ModalWindow (props) {
             <Form.Group controlId="ingredients" onChange={(e) => {onChangeArray(e)}}>
                 <Form.Label>Ingredients</Form.Label>
                 {mealState.ingredients.map(ingredient => {
-                  return <Form.Control type="text" name={ingredient} defaultValue={ingredient}/>
+                  return (
+                    <>
+                      <Row noGutters="true">
+                        <Col noGutters="true" lg="auto">
+                          <Form.Control type="text" name={ingredient} defaultValue={ingredient}/>
+                        </Col>
+                        <Col noGutters="true" lg="auto">
+                          <Button variant="link" className="removeFormField" id={ingredient} name="ingredients" onClick={removeInputField}>x</Button>
+                        </Col>
+                      </Row>
+                    </>
+                  )
                 })} 
             </Form.Group>
             <Form.Group controlId="instructions" onChange={(e) => {onChangeArray(e)}}>
                 <Form.Label>Instructions</Form.Label>
                 {mealState.instructions.map(instruction => {
-                  return <Form.Control type="text" name={instruction} defaultValue={instruction}/>
+                  return (
+                    <>
+                      <Row noGutters="true">
+                        <Col noGutters="true" lg="auto">
+                        <Form.Control type="text" name={instruction} defaultValue={instruction}/>
+                        </Col>
+                        <Col noGutters="true" lg="auto">
+                          <Button variant="link" className="removeFormField" id={instruction} name="instructions" onClick={removeInputField}>x</Button>
+                        </Col>
+                      </Row>
+                    </>
+                  )
                 })} 
             </Form.Group>
         </Form>

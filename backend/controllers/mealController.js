@@ -92,6 +92,7 @@ exports.edit_meal = function(req, res) {
     name: req.body.name,
     description: req.body.description,
     ingredients: req.body.ingredients,
+    instructions: req.body.instructions,
     cuisine: req.body.cuisine,
     difficulty: req.body.difficulty,
     tag: req.body.tags

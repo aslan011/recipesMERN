@@ -44,9 +44,9 @@ function Meal(props) {
               </Accordion.Toggle>
               <Accordion.Collapse eventKey="0">
               <ListGroup>
-                {mealState.instructions && mealState.instructions.map(step => (
+                {mealState.instructions && mealState.instructions.map(instruction => (
                         <ListGroupItem>
-                            {step}
+                            {instruction}
                         </ListGroupItem>
                 ))}
             </ListGroup>
