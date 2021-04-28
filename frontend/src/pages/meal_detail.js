@@ -1,6 +1,7 @@
 import React, { Component, useState } from 'react';
 import { Accordion, Alert, Button, Card, Container, FormGroup, ListGroup, ListGroupItem, Row } from 'react-bootstrap';
 import ModalWindow from '../components/ModalWindow';
+import { v4 as uuidv4 } from 'uuid';
 
 
 function Meal(props) {
@@ -45,7 +46,7 @@ function Meal(props) {
               <Accordion.Collapse eventKey="0">
               <ListGroup>
                 {mealState.instructions && mealState.instructions.map(instruction => (
-                        <ListGroupItem>
+                        <ListGroupItem key={uuidv4()}>
                             {instruction}
                         </ListGroupItem>
                 ))}
@@ -54,7 +55,7 @@ function Meal(props) {
                 <Accordion.Collapse eventKey="1">
               <ListGroup>
                 {mealState.ingredients && mealState.ingredients.map(ingredient => (
-                  <ListGroupItem>
+                  <ListGroupItem key={uuidv4()}>
                             {ingredient}
                         </ListGroupItem>
                 ))}

@@ -1,13 +1,14 @@
 import React from 'react';
 import { Button, Card, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 
 function Recipes(props) {
     return (
         <Container>
            <Row>
                 {props.items.map(item => (
-                    <Card style={{ width: '15rem' }}>
+                    <Card style={{ width: '15rem' }} key={uuidv4()}>
                         <Card.Img variant="top" src="holder.js/100px180" />
                         <Card.Body>
                             <Card.Title>{item.name}</Card.Title>

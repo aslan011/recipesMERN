@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container, FormControl, InputGroup, ListGroup, ListGroupItem, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 
 class Search extends Component {
     constructor() {
@@ -35,7 +36,7 @@ class Search extends Component {
                 </InputGroup>
                 <ListGroup>
                     {this.state.items.map(item => (
-                <ListGroupItem>
+                <ListGroupItem key={uuidv4()}>
                     <Link to={`/recipe/${item._id}`}>{item.name}</Link>
                 </ListGroupItem>
                 ))}

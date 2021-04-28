@@ -1,13 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Col, Container, Form, Modal, Row } from 'react-bootstrap';
+import { v4 as uuidv4 } from 'uuid';
 
 function ModalWindow (props) {
   const [show, setShow] = useState(false);
   const [mealState, setMealState] = useState(props.meal);
   const [res, setRes] = useState();
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = () => {
+    setShow(true);
+  };
+  const handleClose = () => {
+    setShow(false);
+  };
 
   const onSubmit = (e) => {
     setShow(false);
@@ -51,7 +56,6 @@ function ModalWindow (props) {
     const name = e.target.name;
     const id = e.target.id;
     const index = mealState[name].findIndex((a) => {return a == e.target.id});
-    console.log(index)
     updatedState[name].splice(index, 1);
     setMealState(updatedState);
   };
@@ -71,16 +75,14 @@ function ModalWindow (props) {
                 <Form.Label>Ingredients</Form.Label>
                 {mealState.ingredients.map(ingredient => {
                   return (
-                    <>
-                      <Row noGutters="true">
-                        <Col noGutters="true" lg="auto">
-                          <Form.Control type="text" name={ingredient} defaultValue={ingredient}/>
-                        </Col>
-                        <Col noGutters="true" lg="auto">
-                          <Button variant="link" className="removeFormField" id={ingredient} name="ingredients" onClick={removeInputField}>x</Button>
-                        </Col>
-                      </Row>
-                    </>
+                    <Row key={uuidv4()} nogutters="true">
+                      <Col nogutters="true" lg="auto">
+                        <Form.Control type="text" name={ingredient} defaultValue={ingredient}/>
+                      </Col>
+                      <Col nogutters="true" lg="auto">
+                        <Button variant="link" className="removeFormField" id={ingredient} name="ingredients" onClick={removeInputField}>x</Button>
+                      </Col>
+                    </Row>
                   )
                 })} 
             </Form.Group>
@@ -88,16 +90,14 @@ function ModalWindow (props) {
                 <Form.Label>Instructions</Form.Label>
                 {mealState.instructions.map(instruction => {
                   return (
-                    <>
-                      <Row noGutters="true">
-                        <Col noGutters="true" lg="auto">
-                        <Form.Control type="text" name={instruction} defaultValue={instruction}/>
-                        </Col>
-                        <Col noGutters="true" lg="auto">
-                          <Button variant="link" className="removeFormField" id={instruction} name="instructions" onClick={removeInputField}>x</Button>
-                        </Col>
-                      </Row>
-                    </>
+                    <Row key={uuidv4()} nogutters="true">
+                      <Col nogutters="true" lg="auto">
+                      <Form.Control type="text" name={instruction} defaultValue={instruction}/>
+                      </Col>
+                      <Col nogutters="true" lg="auto">
+                        <Button variant="link" className="removeFormField" id={instruction} name="instructions" onClick={removeInputField}>x</Button>
+                      </Col>
+                    </Row>
                   )
                 })} 
             </Form.Group>
