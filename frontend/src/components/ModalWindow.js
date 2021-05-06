@@ -60,6 +60,13 @@ function ModalWindow (props) {
     setMealState(updatedState);
   };
 
+  const addField = (e) => {
+    const updatedState = {...mealState};
+    const name = e.target.name;
+    updatedState[name] = [...mealState[name], ""];
+    setMealState(updatedState);
+  };
+
   const EditForm = () => {
     return (
         <Form>
@@ -85,6 +92,7 @@ function ModalWindow (props) {
                     </Row>
                   )
                 })} 
+              <Button name="ingredients" onClick={addField}>Add</Button>
             </Form.Group>
             <Form.Group controlId="instructions" onChange={(e) => {onChangeArray(e)}}>
                 <Form.Label>Instructions</Form.Label>
@@ -99,13 +107,15 @@ function ModalWindow (props) {
                       </Col>
                     </Row>
                   )
-                })} 
+                })}
+                <Button name="instructions" onClick={addField}>Add</Button>
             </Form.Group>
         </Form>
     )
   };
 
-  return (
+  if (mealState.ingredients && mealState.instructions) {
+    return (
       <>
         <Button onClick = {handleShow}>Edit</Button>
         <Modal
@@ -129,6 +139,9 @@ function ModalWindow (props) {
         </Modal>
       </>
   )
+  }
+
+  return <></>
 };
 
 export default ModalWindow
