@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Col, Container, Form, Modal, Row } from 'react-bootstrap';
+import React, { useState} from 'react';
+import { Button, Col, Form, Modal, Row } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
 
 function ModalWindow (props) {
@@ -46,16 +46,15 @@ function ModalWindow (props) {
     const value = e.target.value;
     const updatedState = {...mealState};
     const array = updatedState[id];
-    const index = mealState[id].findIndex((a) => {return a == e.target.name})
-    array[index] = value;
+    const index = mealState[id].findIndex((a) => {return a.item == e.target.name})
+    array[index].item = value;
     setMealState(updatedState);
   };
 
   const removeInputField = (e) => {
     const updatedState = {...mealState};
     const name = e.target.name;
-    const id = e.target.id;
-    const index = mealState[name].findIndex((a) => {return a == e.target.id});
+    const index = mealState[name].findIndex((a) => {return a.item == e.target.id});
     updatedState[name].splice(index, 1);
     setMealState(updatedState);
   };
@@ -63,7 +62,7 @@ function ModalWindow (props) {
   const addField = (e) => {
     const updatedState = {...mealState};
     const name = e.target.name;
-    updatedState[name] = [...mealState[name], ""];
+    updatedState[name] = [...mealState[name], {item: "", key: uuidv4()}];
     setMealState(updatedState);
   };
 
@@ -78,32 +77,32 @@ function ModalWindow (props) {
                 <Form.Label>Cuisine</Form.Label>
                 <Form.Control type="text" defaultValue={`${mealState.cuisine  || ""}`}/>
             </Form.Group>
-            <Form.Group controlId="ingredients" onChange={(e) => {onChangeArray(e)}}>
+            <Form.Group controlId="ingredients" onChange={onChangeArray}>
                 <Form.Label>Ingredients</Form.Label>
-                {mealState.ingredients.map(ingredient => {
+                {mealState.ingredients.map((ingredient, index) => {
                   return (
-                    <Row key={uuidv4()} nogutters="true">
+                    <Row key={ingredient.key} nogutters="true">
                       <Col nogutters="true" lg="auto">
-                        <Form.Control type="text" name={ingredient} defaultValue={ingredient}/>
+                        <Form.Control type="text" name={ingredient.item} defaultValue={ingredient.item}/>
                       </Col>
                       <Col nogutters="true" lg="auto">
-                        <Button variant="link" className="removeFormField" id={ingredient} name="ingredients" onClick={removeInputField}>x</Button>
+                        <Button variant="link" className="removeFormField" id={ingredient.item} name="ingredients" onClick={removeInputField}>x</Button>
                       </Col>
                     </Row>
                   )
                 })} 
               <Button name="ingredients" onClick={addField}>Add</Button>
             </Form.Group>
-            <Form.Group controlId="instructions" onChange={(e) => {onChangeArray(e)}}>
+            <Form.Group controlId="instructions" onChange={onChangeArray}>
                 <Form.Label>Instructions</Form.Label>
-                {mealState.instructions.map(instruction => {
+                {mealState.instructions.map((instruction, index) => {
                   return (
-                    <Row key={uuidv4()} nogutters="true">
+                    <Row key={instruction.key} nogutters="true">
                       <Col nogutters="true" lg="auto">
-                      <Form.Control type="text" name={instruction} defaultValue={instruction}/>
+                      <Form.Control type="text" name={instruction.item} defaultValue={instruction.item}/>
                       </Col>
                       <Col nogutters="true" lg="auto">
-                        <Button variant="link" className="removeFormField" id={instruction} name="instructions" onClick={removeInputField}>x</Button>
+                        <Button variant="link" className="removeFormField" id={instruction.item} name="instructions" onClick={removeInputField}>x</Button>
                       </Col>
                     </Row>
                   )

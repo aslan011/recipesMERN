@@ -47,7 +47,7 @@ function Meal(props) {
               <ListGroup>
                 {mealState.instructions && mealState.instructions.map(instruction => (
                         <ListGroupItem key={uuidv4()}>
-                            {instruction}
+                            {instruction.item}
                         </ListGroupItem>
                 ))}
             </ListGroup>
@@ -56,7 +56,7 @@ function Meal(props) {
               <ListGroup>
                 {mealState.ingredients && mealState.ingredients.map(ingredient => (
                   <ListGroupItem key={uuidv4()}>
-                            {ingredient}
+                            {ingredient.item}
                         </ListGroupItem>
                 ))}
             </ListGroup>

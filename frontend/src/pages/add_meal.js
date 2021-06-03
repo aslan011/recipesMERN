@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { Alert } from 'react-bootstrap';
+import { v4 as uuidv4 } from 'uuid';
 
 class addMeal extends Component {
   constructor() {
     super()
     this.state = {
       res: [],
-      ingredientsCount: 5,
-      instructionsCount: 3
+      ingredientsCount: 1,
+      instructionsCount: 1
     }
   };
 
@@ -18,10 +19,11 @@ class addMeal extends Component {
     const inputElements = document.getElementById(key).getElementsByTagName("input");
     const inputs = [];
     for (let i = 0; i < inputElements.length; i++) {
-      inputs.push(inputElements[i].value);
+      const input = inputElements[i].value;
+      inputs.push({item: [input], key: uuidv4()});
     }
     this.setState({[key]: inputs})
-    console.log(inputs);
+    console.log(this.state);
   }
 
   addInputField = (e) => {
