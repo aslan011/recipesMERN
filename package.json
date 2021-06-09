@@ -7,7 +7,7 @@
     "frontend": "cd frontend && npm start",
     "api": "cd api && nodemon app.js",
     "dev": "concurrently --kill-others-on-fail \"npm run api\" \"npm run frontend\"",
-    "start": "node ./bin/www",
+    "start": "node backend/bin/www",
     "heroku-postbuild": "cd frontend && npm install && npm run build"
   },
   "repository": {
