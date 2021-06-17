@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "concurrently \"npm run server\" \"cd ../frontend && npm start\"",
+    "start": "concurrently \"npm run server\" \"cd ./frontend && npm start\"",
     "server": "nodemon ./bin/www"
   },
   "dependencies": {
