@@ -24,8 +24,6 @@ router.get('/tags/:query', mealController.tags)
 
 router.get('/search', mealController.index);
 
-/* router.get('/', function(req, res) {
-    res.redirect('/recipes');
-  }); */
+router.get('/', mealController.homepage);
 
 module.exports = router;
