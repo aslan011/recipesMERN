@@ -22,7 +22,7 @@ class App extends Component {
   }
 
   loadRecipes() {
-    fetch(`http://localhost:9000/recipes`)
+    fetch(`/recipes`)
         .then(response => response.json())
         .then(items => this.setState({items}));
   }
