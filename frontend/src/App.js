@@ -22,7 +22,7 @@ class App extends Component {
   }
 
   loadRecipes() {
-    fetch(`https://pick-a-meal876543.herokuapp.com/recipes`)
+    fetch(`/recipes`)
         .then(response => response.json())
         .then(items => this.setState({items}));
   }
