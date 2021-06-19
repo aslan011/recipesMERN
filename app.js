@@ -20,10 +20,18 @@ mongoose.set('debug', true);
 //Bind connection to error event (to get notification of connection errors)
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-app.use(express.static(path.join(__dirname, 'frontend/build')));
-app.get('*', (req, res) => { 
-  res.sendFile(path.join(__dirname + '/frontend/build/index.html')) 
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
 });
+
+app.use(express.static(path.join(__dirname, 'frontend/build')));
+
+app.use(express.static(path.join(__dirname, 'frontend/build')));
 
 app.use(morgan('dev'));
 app.use(express.json());
