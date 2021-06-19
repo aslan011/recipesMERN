@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "concurrently \"npm run server\" \"cd ./frontend && npm start\"",
-    "server": "nodemon ./bin/www"
+    "server": "nodemon ./bin/www",
+    "heroku-postbuild": "cd frontend && npm install && npm run build"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
