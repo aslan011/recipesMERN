@@ -5,6 +5,7 @@ import Meal from './pages/meal_detail'
 import addMeal from './pages/add_meal'
 import Meals from './pages/Homepage'
 import Switch from 'react-bootstrap/esm/Switch';
+import Navbar from './components/NavBar';
 
 class App extends Component {
   constructor() {
@@ -43,6 +44,8 @@ class App extends Component {
 
   render() {
   return (
+    <>
+    <Navbar loggedIn={this.state.loggedIn} setState={state => this.setState(state)} logout = {this.logout}/>
     <Router>
         <Switch>
             <Route path='/addMeal' component={addMeal} />
@@ -51,6 +54,7 @@ class App extends Component {
             <Route path="/" render={() => (<Redirect to="/recipes" />)} />    
         </Switch>
     </Router>
+    </>
   );
 }}
 

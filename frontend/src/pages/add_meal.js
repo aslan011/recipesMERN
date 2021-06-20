@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import { Alert } from 'react-bootstrap';
+import { Alert, Container } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
 
 class addMeal extends Component {
@@ -77,6 +77,7 @@ class addMeal extends Component {
   if (this.state.res.statusMessage) { statusMessage = this.state.res.statusMessage};
 
   return (
+    <Container>
     <Form onSubmit={this.onSubmit}>
         <Form.Group controlId="name" onChange={this.onChange}>
             <Form.Label>Meal name</Form.Label>
@@ -93,28 +94,21 @@ class addMeal extends Component {
         <Form.Group controlId="ingredients" id="ingredients" onChange={this.handleMultiChange}>
             <Form.Label>Ingredients</Form.Label>
             {this.renderInputFields("ingredients")}
-            <Button name="ingredients" onClick={this.addInputField}>Add ingredient</Button>
+            <Button variant="light" name="ingredients" onClick={this.addInputField}>Add ingredient</Button>
         </Form.Group>
         <Form.Group controlId="instructions" id="instructions" onChange={this.handleMultiChange}>
             <Form.Label>Instructions</Form.Label>
             {this.renderInputFields("instructions")}
-            <Button name="instructions" onClick={this.addInputField}>Add instruction</Button>
+            <Button variant="light" name="instructions" onClick={this.addInputField}>Add instruction</Button>
         </Form.Group>
         <Button variant="primary" id = "submit" type="submit">
           Submit
         </Button>
         <Alert>{statusMessage}</Alert>
     </Form>
+    </Container>
   )
   };
 };
-
-/* name: {type: String, required: true},
-ingredients: {type: [String], required: true},
-cuisine: {type: String, required: true},
-difficulty: {type: String},
-description: {type: String},
-instructions: {type: String},
-tags: {type: [String]} */
 
 export default addMeal;

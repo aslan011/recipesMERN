@@ -1,5 +1,5 @@
 $theme-colors: (
-                primary: #d701f3,
+                primary: #259de2,
                 secondary: #3b3c3e,
                 success: #1e6111,
                 info:  #64c3d2,
@@ -10,18 +10,24 @@ $theme-colors: (
 * {
   box-sizing: border-box;
   border-radius: 0.5em;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 }
 
-.container {
-  margin-top: 3em;
+.navbar {
+  margin-bottom: 3em;
 }
 
 .row {
   justify-content:  center;
+  padding-bottom: 1em;
 }
 
 .App {
   text-align: center;
+}
+
+.tagFilter {
+  background-color: rgba(131, 173, 221, 0.411);
 }
 
 .wrapper {
@@ -29,7 +35,8 @@ $theme-colors: (
 }
 
 .btn {
-  margin: 1em;
+  margin-left: 0.5em;
+  padding: 0;
 }
 
 .tags.btn {

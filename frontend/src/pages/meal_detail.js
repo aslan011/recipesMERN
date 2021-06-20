@@ -36,7 +36,7 @@ function Meal(props) {
 
   const Accordian = () => {
     return (
-          <Accordion>
+          <Accordion defaultActiveKey="0">
               <Accordion.Toggle as={Button} variant="link" eventKey="0">
                   Steps
               </Accordion.Toggle>

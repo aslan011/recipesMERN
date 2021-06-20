@@ -17,7 +17,7 @@ function ModalWindow (props) {
   const onSubmit = (e) => {
     setShow(false);
     e.preventDefault();
-    const url = `http://localhost:9000/recipe/${mealState._id}`
+    const url = `/recipe/${mealState._id}`
     const request = new Request(url, {
       method: 'POST',
       body: JSON.stringify(mealState),
@@ -91,7 +91,7 @@ function ModalWindow (props) {
                     </Row>
                   )
                 })} 
-              <Button name="ingredients" onClick={addField}>Add</Button>
+              <Button variant="light" name="ingredients" onClick={addField}>Add another ingredient</Button>
             </Form.Group>
             <Form.Group controlId="instructions" onChange={onChangeArray}>
                 <Form.Label>Instructions</Form.Label>
@@ -107,7 +107,7 @@ function ModalWindow (props) {
                     </Row>
                   )
                 })}
-                <Button name="instructions" onClick={addField}>Add</Button>
+                <Button variant="light" name="instructions" onClick={addField}>Add another ingredient</Button>
             </Form.Group>
         </Form>
     )
@@ -124,7 +124,7 @@ function ModalWindow (props) {
           keyboard={false}
         >
           <Modal.Header closeButton>
-            <Modal.Title>Modal title</Modal.Title>
+            <Modal.Title>Edit recipe</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             {EditForm()}

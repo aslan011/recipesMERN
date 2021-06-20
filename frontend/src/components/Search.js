@@ -20,7 +20,7 @@ class Search extends Component {
             return
         }
 
-        fetch(`http://localhost:9000/search?name=${e.target.value}`)
+        fetch(`/search?name=${e.target.value}`)
             .then(response => response.json())
             .then(items => this.setState({ items }));
     }

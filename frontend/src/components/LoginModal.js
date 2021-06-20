@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, Button, Form, Modal } from 'react-bootstrap';
+import { Alert, Button, Form, Modal, Nav } from 'react-bootstrap';
 
 function ModalWindow (props) {
   const [show, setShow] = useState(false);
@@ -11,7 +11,7 @@ function ModalWindow (props) {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const url = `http://localhost:9000/login`
+    const url = `/login`
     const request = new Request(url, {
       method: 'POST',
       body: JSON.stringify(state),
@@ -67,7 +67,7 @@ function ModalWindow (props) {
 
   return (
       <>
-        <Button onClick = {handleShow}>Login</Button>
+        <Nav.Link onClick = {handleShow}>Login</Nav.Link>
         <Modal
           show={show}
           onHide={handleClose}
@@ -75,7 +75,7 @@ function ModalWindow (props) {
           keyboard={false}
         >
           <Modal.Header closeButton>
-            <Modal.Title>Modal title</Modal.Title>
+            <Modal.Title>Login</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             {EditForm()}

@@ -16,11 +16,10 @@ function Meals(props) {
     return (
       <Container>
     <Row>
-      <Link to='/addMeal'>Add meal</Link>
-      <Button onClick={props.logout}>Logout</Button>
+      <Search />
     </Row>
     <Row>
-      <Search />
+      <Link to='/addMeal'><Button>Add meal</Button></Link>
     </Row>
     <Row>
       <TagFilter handleStateChange = {props.handleStateChange} />

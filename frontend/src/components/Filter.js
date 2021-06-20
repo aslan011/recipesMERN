@@ -12,7 +12,7 @@ class TagFilter extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        fetch(`http://localhost:9000/tags/tags?cuisine=${this.state.cuisine}&difficulty=${this.state.difficulty}`)
+        fetch(`/tags/tags?cuisine=${this.state.cuisine}&difficulty=${this.state.difficulty}`)
         .then(response => response.json())
         .then(items => {this.props.handleStateChange(items)})
     }
@@ -23,7 +23,7 @@ class TagFilter extends Component {
 
     render() {
     return ( 
-        <Accordion>
+        <Accordion className="tagFilter">
             <Accordion.Toggle as={Button} variant="link" eventKey="0">
                 Difficulty
             </Accordion.Toggle>
@@ -31,8 +31,11 @@ class TagFilter extends Component {
                 Cuisine
             </Accordion.Toggle>
             <Accordion.Toggle as={Button} variant="link" eventKey="2">
-                <Button onClick={this.handleSubmit} type="submit" value="Submit">Search</Button>
+                <Button id="tagSearch" onClick={this.handleSubmit} type="submit" value="Submit">Search</Button>
             </Accordion.Toggle>
+            <Accordion.Collapse eventKey="2">
+            <ButtonGroup></ButtonGroup>
+            </Accordion.Collapse>
             <Accordion.Collapse eventKey="0">
                 <ButtonGroup id="difficulty">
                     <Button onClick={this.handleClick} className="tags" variant="secondary">Easy</Button>
@@ -46,9 +49,6 @@ class TagFilter extends Component {
                 <Button onClick={this.handleClick} className="tags"  variant="secondary">Mexican</Button>
                 <Button onClick={this.handleClick} className="tags" variant="secondary">English</Button>
             </ButtonGroup>
-            </Accordion.Collapse>
-            <Accordion.Collapse eventKey="2">
-            <ButtonGroup></ButtonGroup>
             </Accordion.Collapse>
         </Accordion>
     )
