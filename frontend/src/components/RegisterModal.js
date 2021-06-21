@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import { Alert, Button, Form, Modal, Nav } from 'react-bootstrap';
 
-function ModalWindow (props) {
+function RegisterModal (props) {
   const [show, setShow] = useState(false);
   const [state, setState] = useState();
-  const [statusMessage, setStatusMessage] = useState();
+  const [statusMessage, setStatusMessage] = useState("Warning - Demo website");
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const url = `/login`
+    const url = `/register`
     const request = new Request(url, {
       method: 'POST',
       body: JSON.stringify(state),
@@ -32,12 +32,11 @@ function ModalWindow (props) {
   }
 
   const reloadWindowIfLoginSuccessful = (res) => {
-    if (res.response == "Login successful") {
+    if (res.response == "Registration successful") {
+      setStatusMessage("Please log in with new credentials")
       window.setTimeout(function() {
         handleClose();
-      }, 500);
-      localStorage.setItem('token',  JSON.stringify(res.token))
-      props.setState({loggedIn: true});
+      }, 800);
       return      
     }
   };
@@ -61,13 +60,17 @@ function ModalWindow (props) {
                 <Form.Label>Password</Form.Label>
                 <Form.Control type="text" />
             </Form.Group>
+            <Form.Group controlId="password2">
+                <Form.Label>Confirm password</Form.Label>
+                <Form.Control type="text" />
+            </Form.Group>
         </Form>
     )
   };
 
   return (
       <>
-        <Nav.Link onClick = {handleShow}>Login</Nav.Link>
+        <Nav.Link onClick = {handleShow}>Register</Nav.Link>
         <Modal
           show={show}
           onHide={handleClose}
@@ -75,13 +78,13 @@ function ModalWindow (props) {
           keyboard={false}
         >
           <Modal.Header closeButton>
-            <Modal.Title>Login</Modal.Title>
+            <Modal.Title>Register</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             {EditForm()}
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="primary" onClick={onSubmit}>Login</Button>
+            <Button variant="primary" onClick={onSubmit}>Register</Button>
             <Button variant="secondary" onClick={handleClose}>
               Cancel
             </Button>            
@@ -92,4 +95,4 @@ function ModalWindow (props) {
   )
 };
 
-export default ModalWindow
+export default RegisterModal;

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import Login from './LoginModal';
+import Register from './RegisterModal';
 
 function NavigationBar(props) {
     const LoginOption = ()=> {
@@ -8,7 +9,12 @@ function NavigationBar(props) {
             return <Nav.Link onClick={props.logout}>Logout</Nav.Link>
         }
         else {
-            return <Login setState={state => props.setState(state)}/>
+            return (
+                <>
+                <Login setState={state => props.setState(state)}/>
+                <Register setState={state => props.setState(state)}/>
+                </>
+            )
         }
     }
     return (

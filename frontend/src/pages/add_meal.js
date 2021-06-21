@@ -83,6 +83,10 @@ class addMeal extends Component {
             <Form.Label>Meal name</Form.Label>
             <Form.Control type="text"/>
         </Form.Group>
+        <Form.Group controlId="description" onChange={this.onChange}>
+            <Form.Label>Description</Form.Label>
+            <Form.Control type="text"/>
+        </Form.Group>
         <Form.Group controlId="cuisine" onChange={this.onChange}>
             <Form.Label>Cuisine</Form.Label>
             <Form.Control type="text"/>

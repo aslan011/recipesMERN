@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Col, Container, Image, Row } from 'react-bootstrap';
-import {Route, BrowserRouter as Router, Link, Redirect} from 'react-router-dom';
+import {Route, BrowserRouter as Router, Redirect} from 'react-router-dom';
 import Meal from './pages/meal_detail'
 import addMeal from './pages/add_meal'
 import Meals from './pages/Homepage'
@@ -29,11 +28,6 @@ class App extends Component {
   }
 
   handleStateChange = (items, filter, term) => {
-/*     if (items == null) {
-      const filterState = this.state.items.filter(item => item[filter] === term)
-      this.setState({items: filterState})
-      return
-    } */
     this.setState({ items })
   }
 

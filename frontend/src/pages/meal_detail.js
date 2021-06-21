@@ -102,6 +102,9 @@ function Meal(props) {
         <h5 className="secondary">{mealState.difficulty}</h5>
       </Row>
       <Row>
+        <h5 className="secondary">Log in to edit or delete</h5>
+      </Row>
+      <Row>
         {Accordian()}
        </Row>
     </Container>
