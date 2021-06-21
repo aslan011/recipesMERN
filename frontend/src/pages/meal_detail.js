@@ -11,7 +11,7 @@ function Meal(props) {
 
   
   React.useEffect(() => {
-    fetch(`http://localhost:9000/recipe/${props.match.params.id}/`)
+    fetch(`/recipe/${props.match.params.id}/`)
     .then(response => response.json())
     .then(meal => setMeal(meal));
   },[props.match.params.id])
@@ -19,7 +19,7 @@ function Meal(props) {
   const handleDelete = (e) => {
     e.target.disabled = true;
 
-    const url = `http://localhost:9000/recipe/${mealState._id}/delete`;
+    const url = `/recipe/${mealState._id}/delete`;
 
     const request = new Request(url, {
       method: 'DELETE'
