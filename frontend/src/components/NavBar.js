@@ -20,7 +20,7 @@ function NavigationBar(props) {
     return (
         <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
         <Container>
-        <Navbar.Brand href="/recipes">Home</Navbar.Brand>
+        <Navbar.Brand href="/">Home</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse>
             <Nav className="me-auto">
