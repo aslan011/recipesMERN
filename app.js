@@ -21,6 +21,7 @@ mongoose.set('debug', true);
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
@@ -42,7 +43,7 @@ require("./config/passport")(passport);
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+app.use('*', indexRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
