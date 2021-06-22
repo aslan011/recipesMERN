@@ -29,7 +29,7 @@ function NavigationBar(props) {
         </Navbar.Collapse>
         <Navbar.Collapse className="justify-content-end">
             <Nav>
-            <Nav.Link href='https://github.com/aslan011/recipesMERN'>See the code</Nav.Link>
+            <Nav.Link href='https://github.com/aslan011/recipesMERN' target="_blank">See the code</Nav.Link>
             </Nav>
         </Navbar.Collapse>
         </Container>
