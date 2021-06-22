@@ -25,9 +25,6 @@ function Meals(props) {
         <Row>
           <Recipes items={props.state.items} loggedIn={props.state.loggedIn} />
         </Row>
-        <Row>
-          <Button onClick={() =>{props.loadRecipes()}}>View more</Button>
-        </Row>
       </Container>
     )
   }
@@ -46,9 +43,6 @@ function Meals(props) {
           </Row>
           <Row>
             <Recipes items={props.state.items} loggedIn={props.state.loggedIn} />
-          </Row>
-          <Row>
-            <Button onClick={() =>{props.loadRecipes()}}>View more</Button>
           </Row>
       </Container>
   )}
