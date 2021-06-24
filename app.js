@@ -41,8 +41,9 @@ app.use(passport.initialize());// Passport config
 require("./config/passport")(passport);
 
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(express.static(path.join(__dirname, 'frontend/build')));
 app.use('/', indexRouter);
 
 // catch 404 and forward to error handler
