@@ -21,15 +21,12 @@ mongoose.set('debug', true);
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
   );
   next();
 });
-
-app.use(express.static(path.join(__dirname, 'frontend/build')));
 
 app.use(morgan('dev'));
 app.use(express.json());
