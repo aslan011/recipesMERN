@@ -1,3 +1,4 @@
+export
 const Meal = require('../models/meal');
 const url = require('url');
 const { json } = require('express');
@@ -40,6 +41,7 @@ exports.tags = function(req, res) {
 })}; */
 
 exports.homepage = function(req, res) {
+  console.log("running")
   Meal.find().
   exec(function (err, meals) {
     if (err) return res.status(500).send(err);
@@ -103,8 +105,7 @@ exports.edit_meal = function(req, res) {
   Meal.findOneAndUpdate(filter, update)
   .exec(function (err, meal) {
     if (err) return (
-      console.log(err)
-      .res.status(500)
+      res.status(500)
       .json({ statusMessage: err.message })
       .send()
       );

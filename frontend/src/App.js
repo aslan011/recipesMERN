@@ -12,7 +12,7 @@ class App extends Component {
     this.state = {
         items: [],
         loggedIn: false,
-        authUser: JSON.parse(localStorage.getItem('token')),
+        authUser: JSON.parse(localStorage.getItem('token'))
     }
   }
 

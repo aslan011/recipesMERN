@@ -3,8 +3,12 @@ const User = mongoose.model("user");
 const JwtStrategy = require("passport-jwt").Strategy;
 const ExtractJwt = require("passport-jwt").ExtractJwt;
 require('dotenv').config();
-const opts = {};
+const opts = {
+  "jwtFromRequest": "",
+  "secretOrKey":""
+};
 
+export {};
 
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 opts.secretOrKey = process.env.secretOrKey;
