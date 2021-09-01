@@ -1,1 +1,1 @@
-web: ./dist/bin/www
+web: ./dist/bin/www.js
