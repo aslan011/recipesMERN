@@ -1,1 +1,1 @@
-web: ./dist/bin/www
+web: node ./dist/bin/www
