@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "concurrently \"npm run server\" \"cd ./frontend && npm start\"",
-    "server": "node ./dist/bin/www.js",
+    "server": "node ./dist/bin/www",
     "heroku-postbuild": "npm install && npm run server && cd ./frontend && npm install && npm run build"
   },
   "dependencies": {
