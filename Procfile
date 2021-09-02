@@ -1,1 +1,1 @@
-web: node ./dist/bin/www.js && cd ./frontend && npm start
+web: ./dist/bin/www.js
