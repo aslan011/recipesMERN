@@ -6,7 +6,8 @@
       "moduleResolution": "node",
       "sourceMap": true,
       "rootDir":"./",
-      "outDir": "dist"
+      "outDir": "dist",
+      "strict": true
     },
     "lib": ["es6"]
   }

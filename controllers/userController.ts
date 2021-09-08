@@ -7,12 +7,14 @@ const jwt = require("jsonwebtoken");
 require('dotenv').config();
 const validateRegisterInput = require("../validation/register");
 const validateLoginInput = require("../validation/login");// Load User model
+import { Request, Response } from 'express';
+import { UserModel } from '../interfaces/mongoDb';
 
 // @route POST api/users/register
 // @desc Register user
 // @access Public
 
-exports.register = (req, res) => {
+exports.register = (req: Request, res: Response) => {
 
     // Form validation 
     const { errors, isValid } = validateRegisterInput(req.body);
@@ -22,7 +24,7 @@ exports.register = (req, res) => {
       return res.status(400).json(errors);
     }
     
-    User.findOne({ username: req.body.username }).then(user => {
+    User.findOne({ username: req.body.username }).then((user: UserModel) => {
       if (user) {
         return res.status(400).json({ response: "Username already exists" });
       } 
@@ -34,14 +36,14 @@ exports.register = (req, res) => {
         });
         
         // Hash password before saving in database
-        bcrypt.genSalt(10, (err, salt) => {
-          bcrypt.hash(newUser.password, salt, (err, hash) => {
+        bcrypt.genSalt(10, (err: Error, salt: string | number) => {
+          bcrypt.hash(newUser.password, salt, (err: Error, hash: string) => {
             if (err) throw err;
             newUser.password = hash;
             newUser
               .save()
-              .then(user => res.json({response: "Registration successful"}))
-              .catch(err => console.log(err));
+              .then((user: UserModel) => res.json({response: "Registration successful"}))
+              .catch((err: Error) => console.log(err));
           });
         });
       }
@@ -52,7 +54,7 @@ exports.register = (req, res) => {
 // @desc Login user and return JWT token
 // @access Public
 
-exports.login = (req, res) => {
+exports.login = (req: Request, res: Response) => {
     // Form validation
 
     const { errors, isValid } = validateLoginInput(req.body);
@@ -66,13 +68,13 @@ exports.login = (req, res) => {
 
 
     // Find user by username
-    User.findOne({ username }).then(user => {
+    User.findOne({ username }).then((user: UserModel) => {
       // Check if user exists
       if (!user) {
         return res.status(404).json({ response: "Username not found" });
       }
       // Check password
-      bcrypt.compare(password, user.password).then(isMatch => {
+      bcrypt.compare(password, user.password).then((isMatch: boolean) => {
 
         if (isMatch) {
           // User matched
@@ -87,7 +89,7 @@ exports.login = (req, res) => {
             {
               expiresIn: 31556926 // 1 year in seconds
             },
-            (err, token) => {
+            (_err: Error, token: string) => {
               res.json({
                 username: user.username,
                 success: true,

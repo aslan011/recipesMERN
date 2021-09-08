@@ -1,30 +1,31 @@
 export
 const Meal = require('../models/meal');
 const url = require('url');
-const { json } = require('express');
+import { Request, Response } from 'express';
+import {MealModel} from '../interfaces/mongoDb'
 
-exports.meal_detail = function(req, res) {
+exports.meal_detail = function(req: Request, res: Response) {
   Meal.findById(req.params.id)
-  .exec(function (err, meal) {
+  .exec(function (err: Error, meal : MealModel) {
     if (err) return res.status(500).send(err);
     res.send(meal)
   })
 };
 
-exports.index = function(req, res) {
+exports.index = function(req: Request, res: Response) {
   const query = url.parse(req.url,true).query
   const regexQuery = `^${query.name}`;
     Meal.find({name: {$regex: regexQuery, $options: 'mi'}})
-      .exec(function (err, meals) {
+      .exec(function (err: Error, meals : MealModel[]) {
         if (err) return res.status(500).send(err);
         res.send(meals);
       });
 };
 
-exports.tags = function(req, res) {
+exports.tags = function(req: Request, res: Response) {
   const query = url.parse(req.url,true).query;
     Meal.find({cuisine: query.cuisine, difficulty: query.difficulty})
-      .exec(function (err, meals) {
+      .exec(function (err: Error, meals: MealModel[]) {
         if (err) return res.status(500).send(err);
         res.send(meals);
       });
@@ -40,17 +41,16 @@ exports.tags = function(req, res) {
     res.send(meals);
 })}; */
 
-exports.homepage = function(req, res) {
-  console.log("running")
+exports.homepage = function(req: Request, res: Response) {
   Meal.find().
-  exec(function (err, meals) {
+  exec(function (err: Error, meals: MealModel) {
     if (err) return res.status(500).send(err);
     res.send(meals);
 })};
 
-exports.deleteAll = function(req, res) {
+exports.deleteAll = function(req: Request, res: Response) {
   Meal.deleteMany({})
-  .exec(function (err, meal) {
+  .exec(function (err: Error, meal: MealModel) {
     if (err) return (
       res.status(500)
       .json({ statusMessage: err.message })
@@ -63,7 +63,7 @@ exports.deleteAll = function(req, res) {
   })
 }
 
-exports.add_meal = function(req, res) {
+exports.add_meal = function(req: Request, res: Response) {
   //const newMeal = req.body;
   //const mealObj = new Meal({newMeal}) -- interesting, doing it this way doesnt include all the properties
 
@@ -76,7 +76,7 @@ exports.add_meal = function(req, res) {
     instructions: req.body.instructions
   })
 
-  mealObj.save(err => {
+  mealObj.save((err: Error) => {
     if (err) return (
     res.status(500)
     .json({ statusMessage: err.message })
@@ -89,21 +89,21 @@ exports.add_meal = function(req, res) {
   });
 };
 
-exports.edit_meal = function(req, res) {
+exports.edit_meal = function(req: Request, res: Response) {
   const filter = { _id: req.params.id};
-  const update = {
+  const update: MealModel = {
     name: req.body.name,
     description: req.body.description,
     ingredients: req.body.ingredients,
     instructions: req.body.instructions,
     cuisine: req.body.cuisine,
     difficulty: req.body.difficulty,
-    tag: req.body.tags
+    tags: req.body.tags
   }
 
   // was trying to do Json.parse here and it wasnt working, had to manaully parse it.
   Meal.findOneAndUpdate(filter, update)
-  .exec(function (err, meal) {
+  .exec(function (err: Error, meal: MealModel) {
     if (err) return (
       res.status(500)
       .json({ statusMessage: err.message })
@@ -116,9 +116,9 @@ exports.edit_meal = function(req, res) {
   });
 };
 
-exports.delete_meal = function(req, res) {
+exports.delete_meal = function(req: Request, res: Response) {
   Meal.findByIdAndRemove(req.params.id)
-  .exec(function (err, meal) {
+  .exec(function (err: Error, meal: MealModel) {
     if (err) return (
       res.status(500)
       .json({ statusMessage: err.message })

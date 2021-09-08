@@ -8,6 +8,10 @@
     "heroku-postbuild": "cd ./frontend && npm install && npm run build"
   },
   "dependencies": {
+    "@types/express": "^4.17.13",
+    "@types/mongoose": "^5.11.97",
+    "@types/node": "^16.7.12",
+    "@types/passport-jwt": "^3.0.6",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "concurrently": "^5.3.0",

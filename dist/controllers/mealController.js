@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Meal = require('../models/meal');
 const url = require('url');
-const { json } = require('express');
 exports.meal_detail = function (req, res) {
     exports.Meal.findById(req.params.id)
         .exec(function (err, meal) {
@@ -40,7 +39,6 @@ exports.tags = function (req, res) {
     res.send(meals);
 })}; */
 exports.homepage = function (req, res) {
-    console.log("running");
     exports.Meal.find().
         exec(function (err, meals) {
         if (err)
@@ -71,7 +69,7 @@ exports.add_meal = function (req, res) {
         ingredients: req.body.ingredients,
         instructions: req.body.instructions
     });
-    mealObj.save(err => {
+    mealObj.save((err) => {
         if (err)
             return (res.status(500)
                 .json({ statusMessage: err.message })
@@ -90,7 +88,7 @@ exports.edit_meal = function (req, res) {
         instructions: req.body.instructions,
         cuisine: req.body.cuisine,
         difficulty: req.body.difficulty,
-        tag: req.body.tags
+        tags: req.body.tags
     };
     // was trying to do Json.parse here and it wasnt working, had to manaully parse it.
     exports.Meal.findOneAndUpdate(filter, update)

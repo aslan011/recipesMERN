@@ -17,7 +17,7 @@ const MealSchema = new Schema(
 // Virtual for meal's URL
 MealSchema
 .virtual('url')
-.get(function () {
+.get(function (this: {_id: string}) {
   return '/recipe' + this._id;
 });
 

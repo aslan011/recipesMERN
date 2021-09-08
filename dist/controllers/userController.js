@@ -18,7 +18,7 @@ exports.register = (req, res) => {
     if (!isValid) {
         return res.status(400).json(errors);
     }
-    exports.User.findOne({ username: req.body.username }).then(user => {
+    exports.User.findOne({ username: req.body.username }).then((user) => {
         if (user) {
             return res.status(400).json({ response: "Username already exists" });
         }
@@ -35,8 +35,8 @@ exports.register = (req, res) => {
                     newUser.password = hash;
                     newUser
                         .save()
-                        .then(user => res.json({ response: "Registration successful" }))
-                        .catch(err => console.log(err));
+                        .then((user) => res.json({ response: "Registration successful" }))
+                        .catch((err) => console.log(err));
                 });
             });
         }
@@ -55,13 +55,13 @@ exports.login = (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
     // Find user by username
-    exports.User.findOne({ username }).then(user => {
+    exports.User.findOne({ username }).then((user) => {
         // Check if user exists
         if (!user) {
             return res.status(404).json({ response: "Username not found" });
         }
         // Check password
-        bcrypt.compare(password, user.password).then(isMatch => {
+        bcrypt.compare(password, user.password).then((isMatch) => {
             if (isMatch) {
                 // User matched
                 // Create JWT Payload
@@ -71,7 +71,7 @@ exports.login = (req, res) => {
                 }; // Sign token
                 jwt.sign(payload, process.env.secretOrKey, {
                     expiresIn: 31556926 // 1 year in seconds
-                }, (err, token) => {
+                }, (_err, token) => {
                     res.json({
                         username: user.username,
                         success: true,

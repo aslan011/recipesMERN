@@ -1,9 +1,10 @@
 export
 const Validator = require("validator");
 const isEmpty = require("is-empty");
+import { Credentials } from '../interfaces/validation';
 
 
-module.exports = function validateRegisterInput(data) {
+module.exports = function validateRegisterInput(data : Credentials) {
 
   let errors = {
     "username":"",
