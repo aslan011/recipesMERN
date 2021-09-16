@@ -1,0 +1,65 @@
+$theme-colors: (
+                primary: #259de2,
+                secondary: #3b3c3e,
+                success: #1e6111,
+                info:  #64c3d2,
+                warning: #f5e74a,
+                danger: #820410
+                );
+
+* {
+  box-sizing: border-box;
+  border-radius: 0.5em;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
+.navbar {
+  margin-bottom: 3em;
+}
+
+.row {
+  justify-content:  center;
+  padding-bottom: 1em;
+}
+
+.App {
+  text-align: center;
+}
+
+.tagFilter {
+  background-color: rgba(131, 173, 221, 0.411);
+}
+
+.wrapper {
+  width: 20em;
+}
+
+.btn {
+  margin-left: 0.5em;
+  padding: 0;
+}
+
+.tags.btn {
+  margin: 1em;
+}
+
+.card {
+  margin: 1em;
+}
+
+.popup-content {
+  width: 60%;
+  background-color: lightcoral;
+  padding: 2em;
+}
+
+h5 {
+  padding: 0.5em
+}
+
+.removeFormField {
+  padding: 0em;
+  margin: 0em;
+}
+
+@import '~bootstrap/scss/bootstrap.scss';

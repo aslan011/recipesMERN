@@ -3,11 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Validator = require("validator");
 const isEmpty = require("is-empty");
 module.exports = function validateRegisterInput(data) {
-    let errors = {
-        "username": "",
-        "password": "",
-        "password2": ""
-    }; // Convert empty fields to an empty string so we can use validator functions
+    debugger;
+    let errors = {};
+    // Convert empty fields to an empty string so we can use validator functions
     data.username = !isEmpty(data.username) ? data.username : "";
     data.password = !isEmpty(data.password) ? data.password : "";
     data.password2 = !isEmpty(data.password2) ? data.password2 : "";

@@ -1,17 +1,14 @@
 export
 const Validator = require("validator");
 const isEmpty = require("is-empty");
-import { Credentials } from '../interfaces/validation';
+import { Credentials, Errors } from '../interfaces/validation';
 
 
 module.exports = function validateRegisterInput(data : Credentials) {
-
-  let errors = {
-    "username":"",
-    "password":"",
-    "password2":""
-  };// Convert empty fields to an empty string so we can use validator functions
-
+debugger
+  let errors : Errors = {
+  };
+  // Convert empty fields to an empty string so we can use validator functions
   data.username = !isEmpty(data.username) ? data.username : "";
   data.password = !isEmpty(data.password) ? data.password : "";
   data.password2 = !isEmpty(data.password2) ? data.password2 : "";

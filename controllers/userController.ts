@@ -15,7 +15,6 @@ import { UserModel } from '../interfaces/mongoDb';
 // @access Public
 
 exports.register = (req: Request, res: Response) => {
-
     // Form validation 
     const { errors, isValid } = validateRegisterInput(req.body);
 
